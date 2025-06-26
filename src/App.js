@@ -259,7 +259,7 @@ const ImageBoard = () => {
             新しい投稿
           </h2>
           
-          <div className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 <User className="inline mr-1" size={16} />
@@ -368,7 +368,6 @@ const ImageBoard = () => {
 
             <button
               type="submit"
-              onClick={handleSubmit}
               disabled={isBlocked || postingCooldown > 0}
               className={`w-full py-3 px-6 rounded-lg font-semibold transition-all duration-200 shadow-md hover:shadow-lg ${
                 isBlocked || postingCooldown > 0
@@ -376,14 +375,9 @@ const ImageBoard = () => {
                   : 'bg-gradient-to-r from-blue-500 to-indigo-600 text-white hover:from-blue-600 hover:to-indigo-700'
               }`}
             >
-              {isBlocked 
-                ? '一時的にブロック中' 
-                : postingCooldown > 0 
-                  ? `投稿まで ${postingCooldown}秒` 
-                  : '投稿する'
-              }
+              {postingCooldown > 0 ? `投稿まで ${postingCooldown}秒` : '投稿する'}
             </button>
-          </div>
+          </form>
         </div>
 
         {/* 投稿一覧 */}
@@ -441,4 +435,8 @@ const ImageBoard = () => {
   );
 };
 
-export default ImageBoard;
+function App() {
+  return <ImageBoard />;
+}
+
+export default App;
